@@ -69,12 +69,13 @@ const cart = () => {
   cartSendBtn.addEventListener('click', () => {
     const cart = localStorage.getItem('cart') ? 
             JSON.parse(localStorage.getItem('cart')) : []
-            
-    postData(cart).then(() => {
-      localStorage.removeItem('cart')
-      renderCart([])
-      cartTotal.textContent = 0
-    })
+    if(JSON.parse(localStorage.getItem('cart')).length){
+      postData(cart).then(() => {
+        localStorage.removeItem('cart')
+        renderCart([])
+        cartTotal.textContent = 0
+      }) 
+    }
   })
 }
 
